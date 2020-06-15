@@ -71,11 +71,15 @@ async function createPage () {
         const currUser = userList.results[i];
         gallery.innerHTML += appendCard(currUser, userHTML);
     };
+    const cards = document.querySelectorAll('.card');
+    console.log(cards);
     // For loop to create modal for each user
     for (let j = 0; j < userList.results.length; j++) {
         const currUser = userList.results[j];
         body.innerHTML += appendModal(currUser, modalContainer);
     };
+    const modals = document.querySelectorAll('.modal-container');
+    console.log(modals);
 };
 
 createPage();
