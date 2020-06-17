@@ -54,6 +54,10 @@ function appendModal (user, modalContainer) {
                                     <p class="modal-text">Birthday: 10/21/2015</p>
                                 </div>
                             </div>
+                            <div class="modal-btn-container">
+                                <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+                                <button type="button" id="modal-next" class="modal-next btn">Next</button>
+                            </div>
                         </div>`;
     return modalContainer;
 };
@@ -71,18 +75,33 @@ async function createPage () {
         const currUser = userList.results[i];
         gallery.innerHTML += appendCard(currUser, userHTML);
     };
-    const cards = document.getElementsByClassName('card');
-    console.log(cards);
     // For loop to create modal for each user
     for (let j = 0; j < userList.results.length; j++) {
         const currUser = userList.results[j];
         body.innerHTML += appendModal(currUser, modalContainer);
     };
+    // For loop to add event listeners to each card and modal
+    const cards = document.getElementsByClassName('card');
     const modals = document.getElementsByClassName('modal-container');
-    console.log(modals);
     for(let x = 0; x < cards.length; x++) {
         cards[x].addEventListener('click', () => {
             modals[x].hidden = false;
+        });
+        // Event listener to close the modal
+        const closeBtn = document.getElementsByClassName('modal-close-btn');
+        closeBtn[x].addEventListener('click', () => {
+            modals[x].hidden = true;
+        });
+        // Event listener for the Prev and Next buttons
+        const modalBtn = document.querySelectorAll('.modal-btn-container');
+        modalBtn[x].addEventListener('click', (e) => {
+            if (e.target.textContent === 'Prev') {
+                modals[x].hidden = true;
+                modals[x - 1].hidden = false;
+            } else if (e.target.textContent === 'Next') {
+                modals[x].hidden = true;
+                modals[x + 1].hidden = false;
+            }
         });
     }
 };
