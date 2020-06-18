@@ -1,5 +1,5 @@
 // Global variables
-const randomGeneratorAPI = 'https://randomuser.me/api/?results=12';
+const randomGeneratorAPI = 'https://randomuser.me/api/?results=12&nat=us';
 const searchContainer = document.querySelector('.search-container');
 const gallery = document.getElementById('gallery');
 const body = document.querySelector('body');
@@ -51,7 +51,7 @@ function appendModal (user, modalContainer) {
                                     <hr>
                                     <p class="modal-text">${user.phone}</p>
                                     <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
-                                    <p class="modal-text">Birthday: 10/21/2015</p>
+                                    <p class="modal-text">Birthday: ${user.dob.date.substring(5, 7)}/${user.dob.date.substring(8, 10)}/${user.dob.date.substring(0, 4)}</p>
                                 </div>
                             </div>
                             <div class="modal-btn-container">
@@ -96,14 +96,22 @@ async function createPage () {
         const modalBtn = document.querySelectorAll('.modal-btn-container');
         modalBtn[x].addEventListener('click', (e) => {
             if (e.target.textContent === 'Prev') {
-                modals[x].hidden = true;
-                modals[x - 1].hidden = false;
+                if (x !== 0) {
+                    modals[x].hidden = true;
+                    modals[x - 1].hidden = false;
+                } else {
+                    modals[x].hidden = true;
+                };
             } else if (e.target.textContent === 'Next') {
-                modals[x].hidden = true;
-                modals[x + 1].hidden = false;
-            }
+                if (x !== (modals.length -1)) {
+                    modals[x].hidden = true;
+                    modals[x + 1].hidden = false;
+                } else {
+                    modals[x].hidden = true;
+                };
+            };
         });
-    }
+    };
 };
 
 createPage();
