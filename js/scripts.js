@@ -112,6 +112,19 @@ async function createPage () {
             };
         });
     };
+    // Searchbar event listener
+    const searchInput = document.querySelector('.search-input');
+    const userNames = document.querySelectorAll('.card-name');
+    searchInput.addEventListener('keyup', () => {
+        for(let z = 0; z < userNames.length; z++) {
+            const employee = cards[z];
+            if (searchInput.length !== 0 && userNames[z].textContent.toLowerCase().includes(searchInput.value.toLowerCase())) {
+                employee.style.display = 'flex';
+            } else {
+                employee.style.display = 'none';
+            };
+        };
+    });
 };
 
 createPage();
