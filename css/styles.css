@@ -2,7 +2,7 @@
    Public API Request
 ======================================== */
 
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 
 * {
 	box-sizing: border-box;
@@ -14,7 +14,8 @@ html, body {
 }
 
 body {
-    font-family: "Nunito", sans-serif;
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 1.5px;
     text-align: center;
     background: rgba(235, 235, 235, 0.9);
 }
@@ -92,6 +93,11 @@ header h1 {
     border: 1px solid rgba(50, 50, 50, 0.3);
     transition: .4s ease-out;
     overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    transition: .4s ease-out;
 }
 
 .card-img {
